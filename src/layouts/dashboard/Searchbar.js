@@ -3,14 +3,7 @@ import { useState } from 'react';
 import searchFill from '@iconify/icons-eva/search-fill';
 // material
 import { styled, alpha } from '@material-ui/core/styles';
-import {
-  Box,
-  Input,
-  Slide,
-  Button,
-  InputAdornment,
-  ClickAwayListener,
-} from '@material-ui/core';
+import { Box, Input, Slide, Button, InputAdornment, ClickAwayListener } from '@material-ui/core';
 // components
 import { MIconButton } from '../../components/@material-extend';
 
@@ -35,8 +28,8 @@ const SearchbarStyle = styled('div')(({ theme }) => ({
   backgroundColor: `${alpha(theme.palette.background.default, 0.72)}`,
   [theme.breakpoints.up('md')]: {
     height: APPBAR_DESKTOP,
-    padding: theme.spacing(0, 5),
-  },
+    padding: theme.spacing(0, 5)
+  }
 }));
 
 // ----------------------------------------------------------------------
@@ -61,25 +54,21 @@ export default function Searchbar() {
           </MIconButton>
         )}
 
-        <Slide direction='down' in={isOpen} mountOnEnter unmountOnExit>
+        <Slide direction="down" in={isOpen} mountOnEnter unmountOnExit>
           <SearchbarStyle>
             <Input
               autoFocus
               fullWidth
               disableUnderline
-              placeholder='Search…'
+              placeholder="Search…"
               startAdornment={
-                <InputAdornment position='start'>
-                  <Box
-                    component={Icon}
-                    icon={searchFill}
-                    sx={{ color: 'text.disabled', width: 20, height: 20 }}
-                  />
+                <InputAdornment position="start">
+                  <Box component={Icon} icon={searchFill} sx={{ color: 'text.disabled', width: 20, height: 20 }} />
                 </InputAdornment>
               }
               sx={{ mr: 1, fontWeight: 'fontWeightBold' }}
             />
-            <Button variant='contained' onClick={handleClose}>
+            <Button variant="contained" onClick={handleClose}>
               Search
             </Button>
           </SearchbarStyle>

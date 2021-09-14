@@ -24,7 +24,7 @@ const ICONS = {
   image: '/static/icons/editor/image.svg',
   remove: '/static/icons/editor/remove.svg',
   history_undo: '/static/icons/editor/history_undo.svg',
-  history_redo: '/static/icons/editor/history_redo.svg',
+  history_redo: '/static/icons/editor/history_redo.svg'
 };
 
 export const toolbarFull = {
@@ -35,89 +35,81 @@ export const toolbarFull = {
     strikethrough: { icon: ICONS.inline_strikethrough, className: 'toggle' },
     monospace: { icon: ICONS.monospace, className: 'toggle' },
     superscript: { icon: ICONS.superscript, className: 'toggle' },
-    subscript: { icon: ICONS.subscript, className: 'toggle' },
+    subscript: { icon: ICONS.subscript, className: 'toggle' }
   },
   blockType: {
     className: 'dropdown',
-    dropdownClassName: 'dropdown__option',
+    dropdownClassName: 'dropdown__option'
   },
   fontSize: {
     className: 'dropdown',
-    dropdownClassName: 'dropdown__option',
+    dropdownClassName: 'dropdown__option'
   },
   list: {
     unordered: { icon: ICONS.list_unordered, className: 'toggle' },
     ordered: { icon: ICONS.list_ordered, className: 'toggle' },
     indent: { icon: ICONS.list_indent, className: 'toggle' },
-    outdent: { icon: ICONS.list_outdent, className: 'toggle' },
+    outdent: { icon: ICONS.list_outdent, className: 'toggle' }
   },
   textAlign: {
     left: { icon: ICONS.align_left, className: 'toggle' },
     center: { icon: ICONS.align_center, className: 'toggle' },
     right: { icon: ICONS.align_right, className: 'toggle' },
-    justify: { icon: ICONS.align_justify, className: 'toggle' },
+    justify: { icon: ICONS.align_justify, className: 'toggle' }
   },
   fontFamily: {
     className: 'dropdown',
-    dropdownClassName: 'dropdown__option',
+    dropdownClassName: 'dropdown__option'
   },
   colorPicker: {
     icon: ICONS.colorpicker,
     className: 'toggle',
-    popupClassName: 'popup popup__colorpicker',
+    popupClassName: 'popup popup__colorpicker'
   },
   link: {
     popupClassName: 'popup popup__link',
     link: { icon: ICONS.link, className: 'toggle' },
-    unlink: { icon: ICONS.unlink, className: 'toggle' },
+    unlink: { icon: ICONS.unlink, className: 'toggle' }
   },
   emoji: {
     icon: ICONS.emoji,
     className: 'toggle',
-    popupClassName: 'popup popup__emoji',
+    popupClassName: 'popup popup__emoji'
   },
   embedded: {
     icon: ICONS.embedded,
     className: 'toggle',
-    popupClassName: 'popup popup__embedded',
+    popupClassName: 'popup popup__embedded'
   },
   image: {
     icon: ICONS.image,
     className: 'toggle',
     popupClassName: 'popup popup__image',
     uploadCallback: uploadImageCallBack,
-    alt: { present: true, mandatory: true },
+    alt: { present: true, mandatory: true }
   },
   remove: { icon: ICONS.remove, className: 'toggle' },
   history: {
     undo: { icon: ICONS.history_undo, className: 'toggle' },
-    redo: { icon: ICONS.history_redo, className: 'toggle' },
-  },
+    redo: { icon: ICONS.history_redo, className: 'toggle' }
+  }
 };
 
 export const toolbarSimple = {
   ...toolbarFull,
-  options: [
-    'inline',
-    'blockType',
-    'list',
-    'textAlign',
-    'link',
-    'image',
-    'remove',
-  ],
+  options: ['inline', 'blockType', 'list', 'textAlign', 'link', 'image', 'remove'],
   inline: {
     ...toolbarFull.inline,
-    options: ['bold', 'italic', 'underline'],
+    options: ['bold', 'italic', 'underline']
   },
   blockType: {
     ...toolbarFull.blockType,
-    options: ['Normal', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'Blockquote'],
+    options: ['Normal', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'Blockquote']
   },
   list: {
     ...toolbarFull.list,
-    options: ['unordered', 'ordered'],
-  },
+    options: ['unordered', 'ordered']
+  }
 };
 
 function uploadImageCallBack(file) {

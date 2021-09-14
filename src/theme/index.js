@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types';
+
 import { useMemo } from 'react';
 // material
 import { CssBaseline } from '@material-ui/core';
-import { createTheme, ThemeProvider } from '@material-ui/core/styles';
+import { createTheme, ThemeProvider, StyledEngineProvider } from '@material-ui/core/styles';
 // hooks
 import useSettings from '../hooks/useSettings';
 //
@@ -17,7 +18,7 @@ import shadows, { customShadows } from './shadows';
 // ----------------------------------------------------------------------
 
 ThemeConfig.propTypes = {
-  children: PropTypes.node,
+  children: PropTypes.node
 };
 
 export default function ThemeConfig({ children }) {
@@ -26,15 +27,13 @@ export default function ThemeConfig({ children }) {
 
   const themeOptions = useMemo(
     () => ({
-      palette: isLight
-        ? { ...palette.light, mode: 'light' }
-        : { ...palette.dark, mode: 'dark' },
+      palette: isLight ? { ...palette.light, mode: 'light' } : { ...palette.dark, mode: 'dark' },
       shape,
       typography,
       breakpoints,
       direction: themeDirection,
       shadows: isLight ? shadows.light : shadows.dark,
-      customShadows: isLight ? customShadows.light : customShadows.dark,
+      customShadows: isLight ? customShadows.light : customShadows.dark
     }),
     [isLight, themeDirection]
   );
@@ -43,10 +42,12 @@ export default function ThemeConfig({ children }) {
   theme.components = componentsOverride(theme);
 
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <GlobalStyles />
-      {children}
-    </ThemeProvider>
+    <StyledEngineProvider injectFirst>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <GlobalStyles />
+        {children}
+      </ThemeProvider>
+    </StyledEngineProvider>
   );
 }

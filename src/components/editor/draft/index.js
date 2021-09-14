@@ -1,30 +1,28 @@
 import PropTypes from 'prop-types';
-// next
-import dynamic from 'next/dynamic';
+import { Editor } from 'react-draft-wysiwyg';
 //
 import { toolbarFull, toolbarSimple } from './DraftEditorToolbar';
 import DraftEditorStyle from './DraftEditorStyle';
-
-const Editor = dynamic(
-  () => import('react-draft-wysiwyg').then((mod) => mod.Editor),
-  { ssr: false }
-);
 
 // ----------------------------------------------------------------------
 
 DraftEditor.propTypes = {
   simple: PropTypes.bool,
-  sx: PropTypes.object,
+  error: PropTypes.bool,
+  sx: PropTypes.object
 };
 
-export default function DraftEditor({ simple, sx, ...other }) {
+export default function DraftEditor({ simple = false, error, sx, ...other }) {
   return (
-    <DraftEditorStyle sx={sx}>
-      <Editor
-        toolbar={simple ? toolbarSimple : toolbarFull}
-        placeholder='Write something awesome...'
-        {...other}
-      />
+    <DraftEditorStyle
+      sx={{
+        ...(error && {
+          border: (theme) => `solid 1px ${theme.palette.error.main}`
+        }),
+        ...sx
+      }}
+    >
+      <Editor toolbar={simple ? toolbarSimple : toolbarFull} placeholder="Write something awesome..." {...other} />
     </DraftEditorStyle>
   );
 }

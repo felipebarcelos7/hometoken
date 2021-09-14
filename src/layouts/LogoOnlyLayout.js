@@ -1,6 +1,4 @@
-import PropTypes from 'prop-types';
-// next
-import NextLink from 'next/link';
+import { Link as RouterLink, Outlet } from 'react-router-dom';
 // material
 import { styled } from '@material-ui/core/styles';
 // components
@@ -16,25 +14,21 @@ const HeaderStyle = styled('header')(({ theme }) => ({
   position: 'absolute',
   padding: theme.spacing(3, 3, 0),
   [theme.breakpoints.up('sm')]: {
-    padding: theme.spacing(5, 5, 0),
-  },
+    padding: theme.spacing(5, 5, 0)
+  }
 }));
 
 // ----------------------------------------------------------------------
 
-LogoOnlyLayout.propTypes = {
-  children: PropTypes.node,
-};
-
-export default function LogoOnlyLayout({ children }) {
+export default function LogoOnlyLayout() {
   return (
     <>
       <HeaderStyle>
-        <NextLink href='/'>
+        <RouterLink to="/">
           <Logo />
-        </NextLink>
+        </RouterLink>
       </HeaderStyle>
-      {children}
+      <Outlet />
     </>
   );
 }

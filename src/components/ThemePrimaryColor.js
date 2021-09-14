@@ -1,12 +1,7 @@
 import PropTypes from 'prop-types';
 import { useMemo } from 'react';
 // material
-import {
-  alpha,
-  useTheme,
-  createTheme,
-  ThemeProvider,
-} from '@material-ui/core/styles';
+import { alpha, ThemeProvider, createTheme, useTheme } from '@material-ui/core/styles';
 // hooks
 import useSettings from '../hooks/useSettings';
 //
@@ -15,7 +10,7 @@ import componentsOverride from '../theme/overrides';
 // ----------------------------------------------------------------------
 
 ThemePrimaryColor.propTypes = {
-  children: PropTypes.node,
+  children: PropTypes.node
 };
 
 export default function ThemePrimaryColor({ children }) {
@@ -27,12 +22,12 @@ export default function ThemePrimaryColor({ children }) {
       ...defaultTheme,
       palette: {
         ...defaultTheme.palette,
-        primary: setColor,
+        primary: setColor
       },
       customShadows: {
         ...defaultTheme.customShadows,
-        primary: `0 8px 16px 0 ${alpha(setColor.main, 0.24)}`,
-      },
+        primary: `0 8px 16px 0 ${alpha(setColor.main, 0.24)}`
+      }
     }),
     [setColor, defaultTheme]
   );

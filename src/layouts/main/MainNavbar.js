@@ -1,6 +1,4 @@
-// next
-import NextLink from 'next/link';
-import { useRouter } from 'next/router';
+import { NavLink as RouterLink, useLocation } from 'react-router-dom';
 // material
 import { styled } from '@material-ui/core/styles';
 import { Box, Button, AppBar, Toolbar, Container } from '@material-ui/core';
@@ -24,11 +22,11 @@ const ToolbarStyle = styled(Toolbar)(({ theme }) => ({
   height: APP_BAR_MOBILE,
   transition: theme.transitions.create(['height', 'background-color'], {
     easing: theme.transitions.easing.easeInOut,
-    duration: theme.transitions.duration.shorter,
+    duration: theme.transitions.duration.shorter
   }),
   [theme.breakpoints.up('md')]: {
-    height: APP_BAR_DESKTOP,
-  },
+    height: APP_BAR_DESKTOP
+  }
 }));
 
 const ToolbarShadowStyle = styled('div')(({ theme }) => ({
@@ -41,14 +39,14 @@ const ToolbarShadowStyle = styled('div')(({ theme }) => ({
   borderRadius: '50%',
   position: 'absolute',
   width: `calc(100% - 48px)`,
-  boxShadow: theme.customShadows.z8,
+  boxShadow: theme.customShadows.z8
 }));
 
 // ----------------------------------------------------------------------
 
 export default function MainNavbar() {
   const isOffset = useOffSetTop(100);
-  const { pathname } = useRouter();
+  const { pathname } = useLocation();
   const isHome = pathname === '/';
 
   return (
@@ -58,48 +56,36 @@ export default function MainNavbar() {
         sx={{
           ...(isOffset && {
             bgcolor: 'background.default',
-            height: { md: APP_BAR_DESKTOP - 16 },
-          }),
+            height: { md: APP_BAR_DESKTOP - 16 }
+          })
         }}
       >
         <Container
-          maxWidth='lg'
+          maxWidth="lg"
           sx={{
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'space-between',
+            justifyContent: 'space-between'
           }}
         >
-          <NextLink href='/'>
+          <RouterLink to="/">
             <Logo />
-          </NextLink>
-          <Label color='info' sx={{ ml: 1 }}>
-            Next Js 2.5.0
+          </RouterLink>
+          <Label color="info" sx={{ ml: 1 }}>
+            v2.5.0
           </Label>
           <Box sx={{ flexGrow: 1 }} />
 
-          <MHidden width='mdDown'>
-            <MenuDesktop
-              isOffset={isOffset}
-              isHome={isHome}
-              navConfig={navConfig}
-            />
+          <MHidden width="mdDown">
+            <MenuDesktop isOffset={isOffset} isHome={isHome} navConfig={navConfig} />
           </MHidden>
 
-          <Button
-            variant='contained'
-            target='_blank'
-            href='https://material-ui.com/store/items/minimal-dashboard/'
-          >
+          <Button variant="contained" target="_blank" href="https://material-ui.com/store/items/minimal-dashboard/">
             Purchase Now
           </Button>
 
-          <MHidden width='mdUp'>
-            <MenuMobile
-              isOffset={isOffset}
-              isHome={isHome}
-              navConfig={navConfig}
-            />
+          <MHidden width="mdUp">
+            <MenuMobile isOffset={isOffset} isHome={isHome} navConfig={navConfig} />
           </MHidden>
         </Container>
       </ToolbarStyle>
