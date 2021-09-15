@@ -11,7 +11,7 @@ const PRIMARY_COLOR = [
   // DEFAULT
   {
     name: 'default',
-    ...palette.light.primary
+    ...palette.light.primary,
   },
   // PURPLE
   {
@@ -21,7 +21,7 @@ const PRIMARY_COLOR = [
     main: '#7635dc',
     dark: '#431A9E',
     darker: '#200A69',
-    contrastText: '#fff'
+    contrastText: '#fff',
   },
   // CYAN
   {
@@ -31,7 +31,7 @@ const PRIMARY_COLOR = [
     main: '#1CCAFF',
     dark: '#0E77B7',
     darker: '#053D7A',
-    contrastText: palette.light.grey[800]
+    contrastText: palette.light.grey[800],
   },
   // BLUE
   {
@@ -41,7 +41,7 @@ const PRIMARY_COLOR = [
     main: '#0045FF',
     dark: '#0027B7',
     darker: '#00137A',
-    contrastText: '#fff'
+    contrastText: '#fff',
   },
   // ORANGE
   {
@@ -51,7 +51,7 @@ const PRIMARY_COLOR = [
     main: '#fda92d',
     dark: '#B66816',
     darker: '#793908',
-    contrastText: palette.light.grey[800]
+    contrastText: palette.light.grey[800],
   },
   // RED
   {
@@ -61,12 +61,19 @@ const PRIMARY_COLOR = [
     main: '#FF3030',
     dark: '#B71833',
     darker: '#7A0930',
-    contrastText: '#fff'
-  }
+    contrastText: '#fff',
+  },
 ];
 
 SetColor.propTypes = {
-  themeColor: PropTypes.oneOf(['default', 'purple', 'cyan', 'blue', 'orange', 'red'])
+  themeColor: PropTypes.oneOf([
+    'default',
+    'purple',
+    'cyan',
+    'blue',
+    'orange',
+    'red',
+  ]),
 };
 
 function SetColor(themeColor) {
@@ -110,13 +117,13 @@ const initialState = {
   onChangeColor: () => {},
   onToggleStretch: () => {},
   setColor: PRIMARY_COLOR[0],
-  colorOption: []
+  colorOption: [],
 };
 
 const SettingsContext = createContext(initialState);
 
 SettingsProvider.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.node,
 };
 
 function SettingsProvider({ children }) {
@@ -124,34 +131,34 @@ function SettingsProvider({ children }) {
     themeMode: initialState.themeMode,
     themeDirection: initialState.themeDirection,
     themeColor: initialState.themeColor,
-    themeStretch: initialState.themeStretch
+    themeStretch: initialState.themeStretch,
   });
 
   const onChangeMode = (event) => {
     setSettings({
       ...settings,
-      themeMode: event.target.value
+      themeMode: event.target.value,
     });
   };
 
   const onChangeDirection = (event) => {
     setSettings({
       ...settings,
-      themeDirection: event.target.value
+      themeDirection: event.target.value,
     });
   };
 
   const onChangeColor = (event) => {
     setSettings({
       ...settings,
-      themeColor: event.target.value
+      themeColor: event.target.value,
     });
   };
 
   const onToggleStretch = () => {
     setSettings({
       ...settings,
-      themeStretch: !settings.themeStretch
+      themeStretch: !settings.themeStretch,
     });
   };
 
@@ -168,10 +175,10 @@ function SettingsProvider({ children }) {
         setColor: SetColor(settings.themeColor),
         colorOption: PRIMARY_COLOR.map((color) => ({
           name: color.name,
-          value: color.main
+          value: color.main,
         })),
         // Stretch
-        onToggleStretch
+        onToggleStretch,
       }}
     >
       {children}

@@ -1,23 +1,28 @@
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
-import { Link as RouterLink, useLocation } from 'react-router-dom';
+// next
+import NextLink from 'next/link';
+import { useRouter } from 'next/router';
 // material
 import { alpha, styled } from '@material-ui/core/styles';
-import { Box, Link, Stack, Button, Drawer, Tooltip, Typography, CardActionArea } from '@material-ui/core';
+import {
+  Box,
+  Stack,
+  Avatar,
+  Drawer,
+  Tooltip,
+  Typography,
+  CardActionArea,
+} from '@material-ui/core';
 // hooks
-import useAuth from '../../hooks/useAuth';
 import useCollapseDrawer from '../../hooks/useCollapseDrawer';
-// routes
-import { PATH_DASHBOARD, PATH_DOCS } from '../../routes/paths';
 // components
 import Logo from '../../components/Logo';
-import MyAvatar from '../../components/MyAvatar';
 import Scrollbar from '../../components/Scrollbar';
 import NavSection from '../../components/NavSection';
-import { MHidden } from '../../components/@material-extend';
 //
+import { MHidden } from '../../components/@material-extend';
 import sidebarConfig from './SidebarConfig';
-import { DocIllustration } from '../../assets';
 
 // ----------------------------------------------------------------------
 
@@ -28,9 +33,9 @@ const RootStyle = styled('div')(({ theme }) => ({
   [theme.breakpoints.up('lg')]: {
     flexShrink: 0,
     transition: theme.transitions.create('width', {
-      duration: theme.transitions.duration.complex
-    })
-  }
+      duration: theme.transitions.duration.complex,
+    }),
+  },
 }));
 
 const AccountStyle = styled('div')(({ theme }) => ({
@@ -38,19 +43,19 @@ const AccountStyle = styled('div')(({ theme }) => ({
   alignItems: 'center',
   padding: theme.spacing(2, 2.5),
   borderRadius: theme.shape.borderRadiusSm,
-  backgroundColor: theme.palette.grey[500_12]
+  backgroundColor: theme.palette.grey[500_12],
 }));
 
 // ----------------------------------------------------------------------
 
 IconCollapse.propTypes = {
   onToggleCollapse: PropTypes.func,
-  collapseClick: PropTypes.bool
+  collapseClick: PropTypes.bool,
 };
 
 function IconCollapse({ onToggleCollapse, collapseClick }) {
   return (
-    <Tooltip title="Mini Menu">
+    <Tooltip title='Mini Menu'>
       <CardActionArea
         onClick={onToggleCollapse}
         sx={{
@@ -64,8 +69,8 @@ function IconCollapse({ onToggleCollapse, collapseClick }) {
           justifyContent: 'center',
           border: 'solid 1px currentColor',
           ...(collapseClick && {
-            borderWidth: 2
-          })
+            borderWidth: 2,
+          }),
         }}
       >
         <Box
@@ -77,8 +82,8 @@ function IconCollapse({ onToggleCollapse, collapseClick }) {
             transition: (theme) => theme.transitions.create('all'),
             ...(collapseClick && {
               width: 0,
-              height: 0
-            })
+              height: 0,
+            }),
           }}
         />
       </CardActionArea>
@@ -88,15 +93,20 @@ function IconCollapse({ onToggleCollapse, collapseClick }) {
 
 DashboardSidebar.propTypes = {
   isOpenSidebar: PropTypes.bool,
-  onCloseSidebar: PropTypes.func
+  onCloseSidebar: PropTypes.func,
 };
 
 export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
-  const { pathname } = useLocation();
-  const { user } = useAuth();
+  const { pathname } = useRouter();
 
-  const { isCollapse, collapseClick, collapseHover, onToggleCollapse, onHoverEnter, onHoverLeave } =
-    useCollapseDrawer();
+  const {
+    isCollapse,
+    collapseClick,
+    collapseHover,
+    onToggleCollapse,
+    onHoverEnter,
+    onHoverLeave,
+  } = useCollapseDrawer();
 
   useEffect(() => {
     if (isOpenSidebar) {
@@ -108,12 +118,12 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
   const renderContent = (
     <Scrollbar
       sx={{
-        height: 1,
+        height: '100%',
         '& .simplebar-content': {
-          height: 1,
+          height: '100%',
           display: 'flex',
-          flexDirection: 'column'
-        }
+          flexDirection: 'column',
+        },
       }}
     >
       <Stack
@@ -123,61 +133,58 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
           pt: 3,
           pb: 2,
           ...(isCollapse && {
-            alignItems: 'center'
-          })
+            alignItems: 'center',
+          }),
         }}
       >
-        <Stack direction="row" alignItems="center" justifyContent="space-between">
-          <Box component={RouterLink} to="/" sx={{ display: 'inline-flex' }}>
-            <Logo />
-          </Box>
+        <Stack
+          direction='row'
+          alignItems='center'
+          justifyContent='space-between'
+        >
+          <NextLink href='/'>
+            <Box sx={{ display: 'inline-flex' }}>
+              <Logo />
+            </Box>
+          </NextLink>
 
-          <MHidden width="lgDown">
-            {!isCollapse && <IconCollapse onToggleCollapse={onToggleCollapse} collapseClick={collapseClick} />}
+          <MHidden width='lgDown'>
+            {!isCollapse && (
+              <IconCollapse
+                onToggleCollapse={onToggleCollapse}
+                collapseClick={collapseClick}
+              />
+            )}
           </MHidden>
         </Stack>
 
         {isCollapse ? (
-          <MyAvatar sx={{ mx: 'auto', mb: 2 }} />
+          <Avatar
+            alt='My Avatar'
+            src='/static/mock-images/avatars/avatar_default.jpg'
+            sx={{ mx: 'auto', mb: 2 }}
+          />
         ) : (
-          <Link underline="none" component={RouterLink} to={PATH_DASHBOARD.user.account}>
+          <NextLink href='#'>
             <AccountStyle>
-              <MyAvatar />
+              <Avatar
+                alt='My Avatar'
+                src='/static/mock-images/avatars/avatar_default.jpg'
+              />
               <Box sx={{ ml: 2 }}>
-                <Typography variant="subtitle2" sx={{ color: 'text.primary' }}>
-                  {user?.displayName}
+                <Typography variant='subtitle2' sx={{ color: 'text.primary' }}>
+                  displayName
                 </Typography>
-                <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                  {user?.role}
+                <Typography variant='body2' sx={{ color: 'text.secondary' }}>
+                  role
                 </Typography>
               </Box>
             </AccountStyle>
-          </Link>
+          </NextLink>
         )}
       </Stack>
 
       <NavSection navConfig={sidebarConfig} isShow={!isCollapse} />
-
-      <Box sx={{ flexGrow: 1 }} />
-
-      {!isCollapse && (
-        <Stack spacing={3} alignItems="center" sx={{ px: 5, pb: 5, mt: 10, width: 1, textAlign: 'center' }}>
-          <DocIllustration sx={{ width: 1 }} />
-
-          <div>
-            <Typography gutterBottom variant="subtitle1">
-              Hi, {user?.displayName}
-            </Typography>
-            <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-              Need help?
-              <br /> Please check our docs
-            </Typography>
-          </div>
-          <Button href={PATH_DOCS} target="_blank" variant="contained">
-            Documentation
-          </Button>
-        </Stack>
-      )}
     </Scrollbar>
   );
 
@@ -185,29 +192,29 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
     <RootStyle
       sx={{
         width: {
-          lg: isCollapse ? COLLAPSE_WIDTH : DRAWER_WIDTH
+          lg: isCollapse ? COLLAPSE_WIDTH : DRAWER_WIDTH,
         },
         ...(collapseClick && {
-          position: 'absolute'
-        })
+          position: 'absolute',
+        }),
       }}
     >
-      <MHidden width="lgUp">
+      <MHidden width='lgUp'>
         <Drawer
           open={isOpenSidebar}
           onClose={onCloseSidebar}
           PaperProps={{
-            sx: { width: DRAWER_WIDTH }
+            sx: { width: DRAWER_WIDTH },
           }}
         >
           {renderContent}
         </Drawer>
       </MHidden>
 
-      <MHidden width="lgDown">
+      <MHidden width='lgDown'>
         <Drawer
           open
-          variant="persistent"
+          variant='persistent'
           onMouseEnter={onHoverEnter}
           onMouseLeave={onHoverLeave}
           PaperProps={{
@@ -215,16 +222,17 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
               width: DRAWER_WIDTH,
               bgcolor: 'background.default',
               ...(isCollapse && {
-                width: COLLAPSE_WIDTH
+                width: COLLAPSE_WIDTH,
               }),
               ...(collapseHover && {
                 borderRight: 0,
                 backdropFilter: 'blur(6px)',
                 WebkitBackdropFilter: 'blur(6px)', // Fix on Mobile
                 boxShadow: (theme) => theme.customShadows.z20,
-                bgcolor: (theme) => alpha(theme.palette.background.default, 0.88)
-              })
-            }
+                bgcolor: (theme) =>
+                  alpha(theme.palette.background.default, 0.88),
+              }),
+            },
           }}
         >
           {renderContent}

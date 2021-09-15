@@ -2,12 +2,23 @@ import PropTypes from 'prop-types';
 import { Icon } from '@iconify/react';
 import { useState, useEffect } from 'react';
 import menu2Fill from '@iconify/icons-eva/menu-2-fill';
-import { NavLink as RouterLink, useLocation } from 'react-router-dom';
 import arrowIosForwardFill from '@iconify/icons-eva/arrow-ios-forward-fill';
 import arrowIosDownwardFill from '@iconify/icons-eva/arrow-ios-downward-fill';
+// next
+import NextLink from 'next/link';
+import { useRouter } from 'next/router';
 // material
 import { alpha, styled } from '@material-ui/core/styles';
-import { Box, List, Drawer, Link, Collapse, ListItemText, ListItemIcon, ListItemButton } from '@material-ui/core';
+import {
+  Box,
+  List,
+  Drawer,
+  Collapse,
+  ListItem,
+  ListItemText,
+  ListItemIcon,
+  ListItemButton,
+} from '@material-ui/core';
 // components
 import Logo from '../../components/Logo';
 import NavSection from '../../components/NavSection';
@@ -28,7 +39,7 @@ const ListItemStyle = styled(ListItemButton)(({ theme }) => ({
   textTransform: 'capitalize',
   paddingLeft: theme.spacing(PADDING),
   paddingRight: theme.spacing(2.5),
-  color: theme.palette.text.secondary
+  color: theme.palette.text.secondary,
 }));
 
 // ----------------------------------------------------------------------
@@ -37,7 +48,7 @@ MenuMobileItem.propTypes = {
   item: PropTypes.object,
   isOpen: PropTypes.bool,
   isActive: PropTypes.bool,
-  onOpen: PropTypes.func
+  onOpen: PropTypes.func,
 };
 
 function MenuMobileItem({ item, isOpen, isActive, onOpen }) {
@@ -56,7 +67,7 @@ function MenuMobileItem({ item, isOpen, isActive, onOpen }) {
           />
         </ListItemStyle>
 
-        <Collapse in={isOpen} timeout="auto" unmountOnExit>
+        <Collapse in={isOpen} timeout='auto' unmountOnExit>
           <Box sx={{ display: 'flex', flexDirection: 'column-reverse' }}>
             <NavSection
               navConfig={menuConfig[2].children}
@@ -67,8 +78,9 @@ function MenuMobileItem({ item, isOpen, isActive, onOpen }) {
                   backgroundPosition: 'center',
                   bgcolor: 'background.neutral',
                   backgroundRepeat: 'no-repeat',
-                  backgroundImage: 'url(/static/illustrations/illustration_dashboard.png)',
-                  '& > *:not(.MuiTouchRipple-root)': { display: 'none' }
+                  backgroundImage:
+                    'url(/static/illustrations/illustration_dashboard.png)',
+                  '& > *:not(.MuiTouchRipple-root)': { display: 'none' },
                 },
                 '& .MuiListSubheader-root': {
                   pl: PADDING,
@@ -81,13 +93,13 @@ function MenuMobileItem({ item, isOpen, isActive, onOpen }) {
                     height: 2,
                     content: "''",
                     borderRadius: 2,
-                    bgcolor: 'currentColor'
-                  }
+                    bgcolor: 'currentColor',
+                  },
                 },
                 '& .MuiListItem-root': {
                   pl: PADDING,
                   '&:before': { display: 'none' },
-                  '&.active': { color: 'primary.main', bgcolor: 'transparent' }
+                  '&.active': { color: 'primary.main', bgcolor: 'transparent' },
                 },
                 '& .MuiListItemIcon-root': {
                   width: ICON_SIZE,
@@ -97,9 +109,9 @@ function MenuMobileItem({ item, isOpen, isActive, onOpen }) {
                     height: 4,
                     content: "''",
                     borderRadius: '50%',
-                    bgcolor: 'currentColor'
-                  }
-                }
+                    bgcolor: 'currentColor',
+                  },
+                },
               }}
             />
           </Box>
@@ -108,51 +120,35 @@ function MenuMobileItem({ item, isOpen, isActive, onOpen }) {
     );
   }
 
-  if (title === 'Documentation') {
-    return (
+  return (
+    <NextLink key={title} href={path}>
       <ListItemStyle
-        href={path}
-        target="_blank"
-        component={Link}
         sx={{
           ...(isActive && {
             color: 'primary.main',
             fontWeight: 'fontWeightMedium',
-            bgcolor: (theme) => alpha(theme.palette.primary.main, theme.palette.action.selectedOpacity)
-          })
+            bgcolor: (theme) =>
+              alpha(
+                theme.palette.primary.main,
+                theme.palette.action.selectedOpacity
+              ),
+          }),
         }}
       >
         <ListItemIcon>{icon}</ListItemIcon>
         <ListItemText disableTypography primary={title} />
       </ListItemStyle>
-    );
-  }
-
-  return (
-    <ListItemStyle
-      to={path}
-      component={RouterLink}
-      sx={{
-        ...(isActive && {
-          color: 'primary.main',
-          fontWeight: 'fontWeightMedium',
-          bgcolor: (theme) => alpha(theme.palette.primary.main, theme.palette.action.selectedOpacity)
-        })
-      }}
-    >
-      <ListItemIcon>{icon}</ListItemIcon>
-      <ListItemText disableTypography primary={title} />
-    </ListItemStyle>
+    </NextLink>
   );
 }
 
 MenuMobile.propTypes = {
   isOffset: PropTypes.bool,
-  isHome: PropTypes.bool
+  isHome: PropTypes.bool,
 };
 
 export default function MenuMobile({ isOffset, isHome }) {
-  const { pathname } = useLocation();
+  const { pathname } = useRouter();
   const [open, setOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -182,7 +178,7 @@ export default function MenuMobile({ isOffset, isHome }) {
         sx={{
           ml: 1,
           ...(isHome && { color: 'common.white' }),
-          ...(isOffset && { color: 'text.primary' })
+          ...(isOffset && { color: 'text.primary' }),
         }}
       >
         <Icon icon={menu2Fill} />
@@ -195,9 +191,11 @@ export default function MenuMobile({ isOffset, isHome }) {
         PaperProps={{ sx: { pb: 5, width: 260 } }}
       >
         <Scrollbar>
-          <Link component={RouterLink} to="/" sx={{ display: 'inline-flex' }}>
-            <Logo sx={{ mx: PADDING, my: 3 }} />
-          </Link>
+          <Box sx={{ display: 'inline-flex' }}>
+            <NextLink href='/'>
+              <Logo sx={{ mx: PADDING, my: 3 }} />
+            </NextLink>
+          </Box>
 
           <List disablePadding>
             {menuConfig.map((link) => (

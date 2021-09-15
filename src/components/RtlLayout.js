@@ -11,7 +11,7 @@ import { useTheme } from '@material-ui/core/styles';
 // ----------------------------------------------------------------------
 
 RtlLayout.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.node,
 };
 
 export default function RtlLayout({ children }) {
@@ -23,10 +23,8 @@ export default function RtlLayout({ children }) {
 
   const cacheRtl = createCache({
     key: theme.direction === 'rtl' ? 'rtl' : 'css',
-    stylisPlugins: theme.direction === 'rtl' ? [rtlPlugin] : []
+    stylisPlugins: theme.direction === 'rtl' ? [rtlPlugin] : [],
   });
-
-  cacheRtl.compat = true;
 
   return <CacheProvider value={cacheRtl}>{children}</CacheProvider>;
 }

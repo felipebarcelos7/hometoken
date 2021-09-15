@@ -16,21 +16,21 @@ const DraftEditorStyle = styled('div')(({ theme }) => {
       borderRadius: 6,
       background: 'transparent',
       '&.rdw-option-disabled': {
-        opacity: theme.palette.action.disabledOpacity
+        opacity: theme.palette.action.disabledOpacity,
       },
       '& img': {
         width: 16,
         height: 16,
-        filter: isLight ? 'none' : 'invert(100%)'
+        filter: isLight ? 'none' : 'invert(100%)',
       },
       '&[aria-selected="true"]': {
         boxShadow: 'none',
-        background: theme.palette.action.selected
+        background: theme.palette.action.selected,
       },
       '&:hover': {
         boxShadow: 'none',
-        background: theme.palette.action.hover
-      }
+        background: theme.palette.action.hover,
+      },
     },
 
     // Dropdown
@@ -42,21 +42,21 @@ const DraftEditorStyle = styled('div')(({ theme }) => {
       border: `solid 1px ${theme.palette.grey[500_32]}`,
       '&:hover': {
         boxShadow: 'none',
-        background: theme.palette.action.hover
+        background: theme.palette.action.hover,
       },
       '& .rdw-dropdown-selectedtext': {
-        color: theme.palette.text.primary
+        color: theme.palette.text.primary,
       },
       '& .rdw-dropdown-carettoopen': {
         right: isRTL && '10%',
         left: isRTL && 'auto',
-        borderTopColor: theme.palette.text.primary
+        borderTopColor: theme.palette.text.primary,
       },
       '& .rdw-dropdown-carettoclose': {
         right: isRTL && '10%',
         left: isRTL && 'auto',
-        borderBottomColor: theme.palette.text.primary
-      }
+        borderBottomColor: theme.palette.text.primary,
+      },
     },
     '& .dropdown__option': {
       width: '100%',
@@ -69,14 +69,14 @@ const DraftEditorStyle = styled('div')(({ theme }) => {
       '& .rdw-dropdownoption-default': {
         fontSize: 14,
         minHeight: 'auto',
-        padding: theme.spacing(0.5, 2)
+        padding: theme.spacing(0.5, 2),
       },
       '& .rdw-dropdownoption-active': {
-        background: theme.palette.action.selected
+        background: theme.palette.action.selected,
       },
       '& .rdw-dropdownoption-highlighted': {
-        background: theme.palette.action.hover
-      }
+        background: theme.palette.action.hover,
+      },
     },
     // Popup
     '& .popup': {
@@ -90,32 +90,33 @@ const DraftEditorStyle = styled('div')(({ theme }) => {
       background: theme.palette.background.paper,
 
       // Action
-      '& .rdw-link-modal-buttonsection, .rdw-embedded-modal-btn-section, .rdw-image-modal-btn-section': {
-        margin: 0,
-        display: 'flex',
-        marginTop: theme.spacing(2),
-        justifyContent: 'space-between',
-        '& button': {
+      '& .rdw-link-modal-buttonsection, .rdw-embedded-modal-btn-section, .rdw-image-modal-btn-section':
+        {
           margin: 0,
-          fontSize: 13,
-          border: 'none',
-          fontWeight: 'bold',
-          width: 'calc(50% - 4px)',
-          color: theme.palette.common.white,
-          background: theme.palette.primary.main,
-          borderRadius: theme.shape.borderRadius,
-          '&:disabled': {
-            color: theme.palette.action.disabled,
-            background: theme.palette.action.disabledBackground
+          display: 'flex',
+          marginTop: theme.spacing(2),
+          justifyContent: 'space-between',
+          '& button': {
+            margin: 0,
+            fontSize: 13,
+            border: 'none',
+            fontWeight: 'bold',
+            width: 'calc(50% - 4px)',
+            color: theme.palette.common.white,
+            background: theme.palette.primary.main,
+            borderRadius: theme.shape.borderRadius,
+            '&:disabled': {
+              color: theme.palette.action.disabled,
+              background: theme.palette.action.disabledBackground,
+            },
+            '&:last-of-type': {
+              background: 'transparent',
+              color: theme.palette.text.primary,
+            },
+            '&:hover': { boxShadow: 'none' },
+            '&:active': { boxShadow: 'none' },
           },
-          '&:last-of-type': {
-            background: 'transparent',
-            color: theme.palette.text.primary
-          },
-          '&:hover': { boxShadow: 'none' },
-          '&:active': { boxShadow: 'none' }
-        }
-      },
+        },
       // Input
       '& input': {
         height: 26,
@@ -124,8 +125,8 @@ const DraftEditorStyle = styled('div')(({ theme }) => {
         padding: theme.spacing(0, 1.5),
         color: theme.palette.text.primary,
         borderRadius: theme.shape.borderRadius,
-        border: `solid 1px ${theme.palette.grey[500_32]}`
-      }
+        border: `solid 1px ${theme.palette.grey[500_32]}`,
+      },
     },
 
     // Popup Color Picker
@@ -139,18 +140,18 @@ const DraftEditorStyle = styled('div')(({ theme }) => {
           padding: theme.spacing(0.75, 0),
           color: theme.palette.text.secondary,
           borderRadius: theme.shape.borderRadius,
-          fontWeight: theme.typography.fontWeightMedium
+          fontWeight: theme.typography.fontWeightMedium,
         },
         '& .rdw-colorpicker-modal-style-label-active': {
           borderBottom: 'none',
           boxShadow: theme.customShadows.z8,
           color: theme.palette.text.primary,
-          background: theme.palette.common.white
-        }
+          background: theme.palette.common.white,
+        },
       },
       '& .rdw-colorpicker-modal-options': {
         margin: 0,
-        padding: theme.spacing(1.5)
+        padding: theme.spacing(1.5),
       },
       '& .rdw-colorpicker-option': {
         margin: 4,
@@ -174,15 +175,15 @@ const DraftEditorStyle = styled('div')(({ theme }) => {
           justifyContent: 'center',
           color: theme.palette.common.white,
           fontWeight: theme.typography.fontWeightBold,
-          boxShadow: 'inset 0 0 3px 0 rgba(0,0,0,0.12)'
+          boxShadow: 'inset 0 0 3px 0 rgba(0,0,0,0.12)',
         },
         '&[aria-selected="true"]': {
           boxShadow: 'none',
           borderRadius: '50%',
-          '&:before': { fontSize: 12 }
-        }
+          '&:before': { fontSize: 12 },
+        },
       },
-      '& .rdw-colorpicker-cube': { border: 'none' }
+      '& .rdw-colorpicker-cube': { border: 'none' },
     },
 
     // Popup Link
@@ -191,7 +192,7 @@ const DraftEditorStyle = styled('div')(({ theme }) => {
       padding: theme.spacing(2),
       '& .rdw-link-modal-label': {
         fontSize: 13,
-        fontWeight: theme.typography.fontWeightMedium
+        fontWeight: theme.typography.fontWeightMedium,
       },
       '& .rdw-link-modal-input': { marginTop: 4, marginBottom: 12 },
       '& .rdw-link-modal-target-option': {
@@ -200,9 +201,9 @@ const DraftEditorStyle = styled('div')(({ theme }) => {
         alignItems: 'center',
         '& > span': {
           fontSize: 14,
-          marginLeft: theme.spacing(1)
-        }
-      }
+          marginLeft: theme.spacing(1),
+        },
+      },
     },
     // Popup Emoji
     '& .popup__emoji': { overflow: 'auto', padding: theme.spacing(1) },
@@ -219,13 +220,13 @@ const DraftEditorStyle = styled('div')(({ theme }) => {
           padding: theme.spacing(0.75, 0),
           color: theme.palette.text.secondary,
           borderRadius: theme.shape.borderRadius,
-          fontWeight: theme.typography.fontWeightMedium
-        }
+          fontWeight: theme.typography.fontWeightMedium,
+        },
       },
       '& .rdw-embedded-modal-link-section': {
-        padding: theme.spacing(2, 2, 0)
+        padding: theme.spacing(2, 2, 0),
       },
-      '& .rdw-embedded-modal-btn-section': { padding: theme.spacing(0, 2, 2) }
+      '& .rdw-embedded-modal-btn-section': { padding: theme.spacing(0, 2, 2) },
     },
 
     // Popup Image
@@ -241,7 +242,7 @@ const DraftEditorStyle = styled('div')(({ theme }) => {
         fontWeight: theme.typography.fontWeightMedium,
         '& .rdw-image-modal-header-option': {
           position: 'relative',
-          padding: theme.spacing(0.75, 0)
+          padding: theme.spacing(0.75, 0),
         },
         '& .rdw-image-modal-header-label': {
           margin: 0,
@@ -249,32 +250,32 @@ const DraftEditorStyle = styled('div')(({ theme }) => {
           height: '100%',
           border: 'none',
           position: 'absolute',
-          background: 'transparent'
+          background: 'transparent',
         },
         '& .rdw-image-modal-header-label-highlighted': {
           zIndex: -1,
           boxShadow: theme.customShadows.z8,
           background: theme.palette.common.white,
-          borderRadius: theme.shape.borderRadius
-        }
+          borderRadius: theme.shape.borderRadius,
+        },
       },
       '& .rdw-image-modal-upload-option': {
         margin: 0,
         outline: 'none',
         background: 'none',
-        padding: theme.spacing(2)
+        padding: theme.spacing(2),
       },
       '& .rdw-image-modal-upload-option-label': {
         fontSize: 13,
         textAlign: 'center',
         color: theme.palette.text.disabled,
         borderRadius: theme.shape.borderRadius,
-        border: `dashed 1px ${theme.palette.grey[500_32]}`
+        border: `dashed 1px ${theme.palette.grey[500_32]}`,
       },
       '& .rdw-image-modal-btn-section': { padding: theme.spacing(0, 2, 2) },
       '& .rdw-image-modal-size, .rdw-image-modal-url-section': {
-        padding: theme.spacing(0, 2)
-      }
+        padding: theme.spacing(0, 2),
+      },
     },
 
     // Toolbar
@@ -282,7 +283,7 @@ const DraftEditorStyle = styled('div')(({ theme }) => {
       border: 'none',
       marginBottom: 0,
       background: 'transparent',
-      borderBottom: `solid 1px ${theme.palette.grey[500_32]}`
+      borderBottom: `solid 1px ${theme.palette.grey[500_32]}`,
     },
 
     // Main
@@ -290,9 +291,9 @@ const DraftEditorStyle = styled('div')(({ theme }) => {
       minHeight: 200,
       padding: theme.spacing(0, 2),
       '& .public-DraftEditorPlaceholder-root': {
-        color: theme.palette.text.disabled
-      }
-    }
+        color: theme.palette.text.disabled,
+      },
+    },
   };
 });
 

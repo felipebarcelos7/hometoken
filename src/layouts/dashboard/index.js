@@ -1,5 +1,5 @@
+import PropTypes from 'prop-types';
 import { useState } from 'react';
-import { Outlet } from 'react-router-dom';
 // material
 import { styled, useTheme } from '@material-ui/core/styles';
 // hooks
@@ -16,7 +16,7 @@ const APP_BAR_DESKTOP = 92;
 const RootStyle = styled('div')({
   display: 'flex',
   minHeight: '100%',
-  overflow: 'hidden'
+  overflow: 'hidden',
 });
 
 const MainStyle = styled('div')(({ theme }) => ({
@@ -28,13 +28,17 @@ const MainStyle = styled('div')(({ theme }) => ({
   [theme.breakpoints.up('lg')]: {
     paddingTop: APP_BAR_DESKTOP + 24,
     paddingLeft: theme.spacing(2),
-    paddingRight: theme.spacing(2)
-  }
+    paddingRight: theme.spacing(2),
+  },
 }));
 
 // ----------------------------------------------------------------------
 
-export default function DashboardLayout() {
+DashboardLayout.propTypes = {
+  children: PropTypes.node,
+};
+
+export default function DashboardLayout({ children }) {
   const theme = useTheme();
   const { collapseClick } = useCollapseDrawer();
   const [open, setOpen] = useState(false);
@@ -42,18 +46,21 @@ export default function DashboardLayout() {
   return (
     <RootStyle>
       <DashboardNavbar onOpenSidebar={() => setOpen(true)} />
-      <DashboardSidebar isOpenSidebar={open} onCloseSidebar={() => setOpen(false)} />
+      <DashboardSidebar
+        isOpenSidebar={open}
+        onCloseSidebar={() => setOpen(false)}
+      />
       <MainStyle
         sx={{
           transition: theme.transitions.create('margin', {
-            duration: theme.transitions.duration.complex
+            duration: theme.transitions.duration.complex,
           }),
           ...(collapseClick && {
-            ml: '102px'
-          })
+            ml: '102px',
+          }),
         }}
       >
-        <Outlet />
+        {children}
       </MainStyle>
     </RootStyle>
   );
